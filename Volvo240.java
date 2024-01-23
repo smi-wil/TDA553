@@ -15,6 +15,4 @@ class Volvo240 extends Vehicle{
     protected double speedFactor() {
         return enginePower * 0.01 * trimFactor;
     }
-
-
 }

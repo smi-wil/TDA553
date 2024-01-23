@@ -14,46 +14,6 @@ class Volvo240Test {
          Volvo2 = new Volvo240();
     }
 
-    @AfterEach
-    void tearDown() {
-    }
-
-    @Test
-    void getNrDoors() {
-    }
-
-    @Test
-    void getEnginePower() {
-    }
-
-    @Test
-    void getCurrentSpeed() {
-    }
-
-    @Test
-    void getColor() {
-    }
-
-    @Test
-    void setColor() {
-    }
-
-    @Test
-    void startEngine() {
-    }
-
-    @Test
-    void stopEngine() {
-    }
-
-    @Test
-    void incrementSpeed() {
-    }
-
-    @Test
-    void decrementSpeed() {
-    }
-
     @Test
     void move() {
         double y = Volvo1.yPosition;
@@ -69,26 +29,14 @@ class Volvo240Test {
         Volvo1.turnLeft();
         Volvo1.currentSpeed = 10;
         Volvo1.move();
-
         assertTrue(Volvo1.xPosition < 0);
-
     }
-
     @Test
     void turnRight() {
-            Volvo1.turnRight();
-            Volvo1.currentSpeed = 10;
-            Volvo1.move();
-            assertTrue(Volvo1.xPosition > 0);
-
-        }
-
-    @Test
-    void gas() {
-    }
-
-    @Test
-    void brake() {
+        Volvo1.turnRight();
+        Volvo1.currentSpeed = 10;
+        Volvo1.move();
+        assertTrue(Volvo1.xPosition > 0);
     }
 
     @Test

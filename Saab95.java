@@ -25,6 +25,4 @@ class Saab95 extends Vehicle{
     protected void deactivateTurbo(){
         turboOn = false;
     }
-
-
 }
