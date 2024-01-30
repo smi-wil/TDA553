@@ -16,10 +16,14 @@ public class Lorry extends Truck implements HasBed, Loadable{
         stopEngine();
     }
     public void increaseBedAngle(){
-        truckBed.increaseBedAngle(true, currentSpeed); //delegation
+        if (currentSpeed == 0) {
+            truckBed.setTruckBedAngle(70);
+        }
     }
     public void decreaseBedAngle(){
-        truckBed.decreaseBedAngle(true, currentSpeed);
+        if (currentSpeed == 0){
+            truckBed.setTruckBedAngle(0);
+        }
     }
     @Override
     protected double speedFactor() {
@@ -41,13 +45,13 @@ public class Lorry extends Truck implements HasBed, Loadable{
     }
     public void addCar(Car car) {
         double dist = this.calculateDistance(car);
-        if (totCars < 6 && dist <= 12 && !(truckBed.truckBedUp)) {
+        if (totCars < 6 && dist <= 12 && (truckBed.getTruckBedAngle() == 70)) {
             carStack.push(car);
             totCars++;
         }
     }
     public void removeCar(){
-        if (totCars > 0 && !(truckBed.truckBedUp)){
+        if (totCars > 0 && !(truckBed.getTruckBedAngle() == 70)){
             carStack.pop();
             }
     }
@@ -56,7 +60,7 @@ public class Lorry extends Truck implements HasBed, Loadable{
     @Override
     public void move(){
 
-        if (truckBed.truckBedUp) {
+        if (truckBed.getTruckBedAngle() == 0) {
             super.move();
 
             Iterator<Car> iterator = carStack.iterator();

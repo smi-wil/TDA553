@@ -14,17 +14,27 @@ public class Scania extends Truck implements HasBed{
     protected double speedFactor() {
         return enginePower * 0.01;
     }
+
     public void increaseBedAngle(){
-        truckBed.increaseBedAngle(currentSpeed);
+        //change tilt angle
+        int currentAngle = truckBed.getTruckBedAngle();
+        if (currentAngle <= 65 && currentSpeed == 0) {
+            truckBed.setTruckBedAngle(currentAngle+5);
+        }
     }
+
     public void decreaseBedAngle() {
-        truckBed.decreaseBedAngle(currentSpeed);
+        //change tilt angle
+        int currentAngle = truckBed.getTruckBedAngle();
+        if (currentAngle >= 5 && currentSpeed == 0) {
+            truckBed.setTruckBedAngle(currentAngle-5);
+        }
     }
 
     @Override
     public void move() {
         try{
-            if (truckBed.truckBedAngle != 0) {
+            if (truckBed.getTruckBedAngle() != 0) {
                 throw new IllegalArgumentException("Truck bed angle must be 0");
              }
             super.move();
