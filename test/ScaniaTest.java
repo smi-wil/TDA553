@@ -21,16 +21,16 @@ class ScaniaTest {
     @Test
     void increaseBedAngle() {
         scania1.increaseBedAngle();
-        assertTrue(scania1.truckBedAngle > 0);
+        assertTrue(scania1.truckBed.getTruckBedAngle() > 0);
 
     }
 
     @Test
     void decreaseBedAngle() {
         scania1.incrementSpeed(1);
-        scania1.truckBedAngle = 10;
+        scania1.truckBed.setTruckBedAngle(10);
         scania1.decreaseBedAngle();
-        assertEquals(scania1.truckBedAngle, 10);
+        assertEquals(scania1.truckBed.getTruckBedAngle(), 10);
     }
 
     @Test

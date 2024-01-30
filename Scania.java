@@ -1,12 +1,12 @@
 import java.awt.*;
 
-public class Scania extends Truck implements HasBed{
+public class Scania extends Truck implements HasTruckBed {
 
-    protected TruckBed truckBed;
+    protected TruckBed truckBed = new TruckBed();
 
     protected Scania(Color color, String modelName) {
         super(color, 1000, modelName);
-        TruckBed truckBed = new TruckBed();
+        // this.truckBed = new TruckBed();
         stopEngine();
     }
 

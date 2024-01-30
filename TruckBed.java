@@ -6,11 +6,11 @@ public class TruckBed{
         int truckBedAngle = 0;
     }
 
-    int getTruckBedAngle(){
+    public int getTruckBedAngle(){
         return truckBedAngle;
     }
 
-    void setTruckBedAngle(int angle){
+    public void setTruckBedAngle(int angle){
         truckBedAngle = angle;
     }
 }
