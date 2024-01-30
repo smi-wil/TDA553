@@ -1,13 +1,12 @@
 import java.awt.*;
 
-public class Scania extends Vehicle {
+public class Scania extends Truck implements HasBed{
 
-    protected double truckBedAngle;
+    protected TruckBed truckBed;
 
     protected Scania(Color color, String modelName) {
-        super(2, color, 1000, modelName);
-        truckBedAngle = 0;
-
+        super(color, 1000, modelName);
+        TruckBed truckBed = new TruckBed();
         stopEngine();
     }
 
@@ -15,28 +14,17 @@ public class Scania extends Vehicle {
     protected double speedFactor() {
         return enginePower * 0.01;
     }
-
-    protected void increaseBedAngle() {
-        //change tilt angle
-        if (truckBedAngle <= 65 && currentSpeed == 0) {
-            truckBedAngle += 5;
-        }
+    public void increaseBedAngle(){
+        truckBed.increaseBedAngle(currentSpeed);
     }
-
-    protected void decreaseBedAngle() {
-        //change tilt angle
-        if (truckBedAngle >= 5 && currentSpeed == 0) {
-            truckBedAngle -= 5;
-        }
-    }
-    protected double getBedTruckAngle(){
-        return truckBedAngle;
+    public void decreaseBedAngle() {
+        truckBed.decreaseBedAngle(currentSpeed);
     }
 
     @Override
     public void move() {
         try{
-            if (truckBedAngle != 0) {
+            if (truckBed.truckBedAngle != 0) {
                 throw new IllegalArgumentException("Truck bed angle must be 0");
              }
             super.move();

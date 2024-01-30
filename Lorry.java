@@ -1,19 +1,31 @@
 import java.awt.*;
 import java.util.Stack;
 import java.util.List;
+import java.util.Iterator;
 
-public class Lorry extends Scania {
-    protected Stack<Vehicle> carStack;
+public class Lorry extends Truck implements HasBed, Loadable{
+    protected TruckBed truckBed;
+    protected Stack<Car> carStack;
     protected int totCars = 0;
 
+
     protected Lorry() {
-        super(Color.black, "Lorry");
-        carStack = new Stack<>();
+        super(Color.black, 2000, "Lorry");
+        truckBed = new TruckBed();
 
         stopEngine();
     }
-
-    public double calculateDistance(Vehicle car){
+    public void increaseBedAngle(){
+        truckBed.increaseBedAngle(true, currentSpeed); //delegation
+    }
+    public void decreaseBedAngle(){
+        truckBed.decreaseBedAngle(true, currentSpeed);
+    }
+    @Override
+    protected double speedFactor() {
+        return enginePower * 0.01;
+    }
+    public double calculateDistance(Car car){
        double carXpos = car.xPosition;
        double carYpos = car.yPosition;
 
@@ -27,53 +39,34 @@ public class Lorry extends Scania {
 
 
     }
-    protected void addCar(Vehicle car) {
+    public void addCar(Car car) {
         double dist = this.calculateDistance(car);
-        if (!(car instanceof Scania) && totCars < 6 && dist <= 12 && truckBedAngle == 1) {
-
+        if (totCars < 6 && dist <= 12 && !(truckBed.truckBedUp)) {
             carStack.push(car);
             totCars++;
-
         }
     }
-    protected void removeCar(){
-            double dist = this.calculateDistance(car);
-            if (!(car instanceof Scania) && totCars < 6 && dist <= 12  && truckBedAngle == 1){
-
-                carStack.push(car);
-                totCars++;
-
+    public void removeCar(){
+        if (totCars > 0 && !(truckBed.truckBedUp)){
+            carStack.pop();
             }
-
     }
 
-
-    @Override
-    protected void increaseBedAngle() {
-        //fälla ner
-        truckBedAngle = 1;
-    }
-
-
-    @Override
-    protected void decreaseBedAngle() {
-        //fälla upp
-        truckBedAngle = 0;
-    }
-
-    protected double getBedTruckAngle() {
-        return truckBedAngle;
-    }
 
     @Override
     public void move(){
-        List<Vehicle> listFromStack = List.copyOf(carStack);
 
-        for (int i = carStack.size() - 1; i >= 0; i--){
+        if (truckBed.truckBedUp) {
+            super.move();
 
+            Iterator<Car> iterator = carStack.iterator();
+
+            while (iterator.hasNext()) {
+                Car car = iterator.next();
+                car.xPosition = this.xPosition;
+                car.yPosition = this.yPosition;
+            }
         }
-
     }
-
 }
 
