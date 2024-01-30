@@ -14,13 +14,13 @@ public class Lorry extends Truck implements HasTruckBed, Loadable<Car> {
 
         stopEngine();
     }
-
+    @Override
     public void increaseBedAngle() {
         if (currentSpeed == 0) {
             truckBed.setTruckBedAngle(70);
         }
     }
-
+    @Override
     public void decreaseBedAngle() {
         if (currentSpeed == 0) {
             truckBed.setTruckBedAngle(0);
@@ -46,7 +46,7 @@ public class Lorry extends Truck implements HasTruckBed, Loadable<Car> {
 
 
     }
-
+    @Override
     public void addCar(Car car) {
         double dist = this.calculateDistance(car);
         if (totCars < 6 && dist <= 12 && (truckBed.getTruckBedAngle() == 70)) {
@@ -54,7 +54,7 @@ public class Lorry extends Truck implements HasTruckBed, Loadable<Car> {
             totCars++;
         }
     }
-
+    @Override
     public Car removeCar() {
         if (totCars > 0 && !(truckBed.getTruckBedAngle() == 70)) { // This means the Lorry will be still.
 

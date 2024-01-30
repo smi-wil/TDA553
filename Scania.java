@@ -14,7 +14,7 @@ public class Scania extends Truck implements HasTruckBed {
     protected double speedFactor() {
         return enginePower * 0.01;
     }
-
+    @Override
     public void increaseBedAngle(){
         //change tilt angle
         int currentAngle = truckBed.getTruckBedAngle();
@@ -22,7 +22,7 @@ public class Scania extends Truck implements HasTruckBed {
             truckBed.setTruckBedAngle(currentAngle+5);
         }
     }
-
+    @Override
     public void decreaseBedAngle() {
         //change tilt angle
         int currentAngle = truckBed.getTruckBedAngle();
