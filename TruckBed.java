@@ -1,16 +1,21 @@
 
+public abstract class TruckBed {
+    protected int truckBedAngle;
 
-public class TruckBed{
-    private int truckBedAngle;
-    public TruckBed(){
-        int truckBedAngle = 0;
+    public TruckBed() {
+        this.truckBedAngle = 0;
     }
 
-    public int getTruckBedAngle(){
+    public int getTruckBedAngle() {
         return truckBedAngle;
     }
 
-    public void setTruckBedAngle(int angle){
+    public void setTruckBedAngle(int angle) {
         truckBedAngle = angle;
     }
+
+    // Abstract methods to be implemented by subclasses
+    abstract void increaseBedAngle();
+
+    abstract void decreaseBedAngle();
 }

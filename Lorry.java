@@ -1,30 +1,14 @@
 import java.awt.*;
-import java.util.Stack;
 import java.util.Iterator;
+import java.util.Stack;
 
 class Lorry extends Truck implements Loadable<Car> {
-
     protected Stack<Car> carStack = new Stack<>();
     protected int totCars = 0;
 
-
     protected Lorry() {
-        super(Color.black, 2000, "Lorry");
-
-
+        super(Color.black, 2000, "Lorry", new StandardTruckBed());
         stopEngine();
-    }
-    @Override
-    public void increaseBedAngle() {
-        if (currentSpeed == 0) {
-            truckBed.setTruckBedAngle(70);
-        }
-    }
-    @Override
-    public void decreaseBedAngle() {
-        if (currentSpeed == 0) {
-            truckBed.setTruckBedAngle(0);
-        }
     }
 
     @Override
