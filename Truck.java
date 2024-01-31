@@ -14,5 +14,17 @@ abstract class Truck extends Vehicle {
             super.gas(amount);
         }
     }
+
+    public void increaseBedAngle() {
+        if (currentSpeed == 0) {
+            truckBed.increaseBedAngle(); // Increase angle only if the truck is stationary
+        }
+    }
+
+    public void decreaseBedAngle() {
+        if (currentSpeed == 0) {
+            truckBed.decreaseBedAngle(); // Decrease angle only if the truck is stationary
+        }
+    }
 }
 
