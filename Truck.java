@@ -26,5 +26,9 @@ abstract class Truck extends Vehicle {
             truckBed.decreaseBedAngle(); // Decrease angle only if the truck is stationary
         }
     }
+    @Override
+    protected double speedFactor() {
+        return enginePower * 0.01;
+    }
 }
 

@@ -11,11 +11,6 @@ class Lorry extends Truck implements Loadable<Car> {
         stopEngine();
     }
 
-    @Override
-    protected double speedFactor() {
-        return enginePower * 0.01;
-    }
-
     public double calculateDistance(Car car) {
         double carXpos = car.xPosition;
         double carYpos = car.yPosition;
