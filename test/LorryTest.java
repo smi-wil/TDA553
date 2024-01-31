@@ -11,12 +11,15 @@ class LorryTest {
     Lorry lorry2 = new Lorry();
     Car volvo1 = new Volvo240();
     Car volvo2 = new Volvo240();
+
+    Scania scania1 = new Scania(Color.pink, "Scania");
     @BeforeEach
     void setUp() {
         lorry1 = new Lorry();
         lorry2 = new Lorry();
         volvo1 = new Volvo240();
         volvo2 = new Volvo240();
+        scania1 = new Scania(Color.pink, "Scania");
     }
 
     @Test

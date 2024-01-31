@@ -1,5 +1,5 @@
-public interface Loadable <A extends Car>{
+interface Loadable <A>{
     public void addCar(A car);
-    public Car removeCar();
+    public A removeCar();
 
 }

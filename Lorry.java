@@ -2,15 +2,15 @@ import java.awt.*;
 import java.util.Stack;
 import java.util.Iterator;
 
-public class Lorry extends Truck implements HasTruckBed, Loadable<Car> {
-    protected TruckBed truckBed;
+class Lorry extends Truck implements Loadable<Car> {
+
     protected Stack<Car> carStack = new Stack<>();
     protected int totCars = 0;
 
 
     protected Lorry() {
         super(Color.black, 2000, "Lorry");
-        truckBed = new TruckBed();
+
 
         stopEngine();
     }
