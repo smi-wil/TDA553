@@ -37,46 +37,36 @@ abstract class Vehicle implements Movable {
     protected Color getColor() {
         return color;
     }
-
     protected void setColor(Color clr) {
         color = clr;
     }
-
     protected void startEngine() {
         currentSpeed = 0.1;
     }
-
     protected void stopEngine() {
         currentSpeed = 0;
     }
-
     protected abstract double speedFactor();
-
 
     protected void incrementSpeed(double amount) {
         currentSpeed = Math.min(getCurrentSpeed() + speedFactor() * amount, enginePower);
     }
-
     protected void decrementSpeed(double amount) {
         currentSpeed = Math.max(getCurrentSpeed() - speedFactor() * amount, 0);
     }
-
     @Override
     public void move() {
         xPosition += currentSpeed * Math.sin(Math.toRadians(direction));
         yPosition += currentSpeed * Math.cos(Math.toRadians(direction));
     }
-
     @Override
     public void turnLeft() {
         direction = (direction - 10) % 360;
     }
-
     @Override
     public void turnRight() {
         direction = (direction + 10) % 360;
     }
-
     public void gas(double amount) {
         if (amount > 1) {
             amount = 1;
@@ -85,8 +75,6 @@ abstract class Vehicle implements Movable {
         }
         incrementSpeed(amount);
     }
-
-
     public void brake(double amount) {
         if (amount > 1) {
             amount = 1;
