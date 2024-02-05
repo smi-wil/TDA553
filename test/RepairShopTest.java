@@ -1,6 +1,8 @@
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import java.util.ArrayList;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 class RepairShopTest {
@@ -35,5 +37,15 @@ class RepairShopTest {
 
     @Test
     void removeCar() {
+        carRepairShop.addCar(volvo2);
+        carRepairShop.addCar(volvo1);
+        carRepairShop.addCar(saab1);
+        carRepairShop.removeCar();
+        carRepairShop.removeCar();
+        ArrayList carList = carRepairShop.getCarList();
+
+        assertEquals(carRepairShop.getCarList().size(), 1);
+        assertEquals(carList.get(0), saab1);
+
     }
 }

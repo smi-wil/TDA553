@@ -16,7 +16,7 @@ public class RepairShop <A extends Car> implements Loadable<A>{
         }
     }
 
-    @Override
+    @Override // FIFO
     public A removeCar(){
         if (carList.size() > 0){
            return carList.remove(0);
