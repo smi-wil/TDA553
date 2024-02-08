@@ -2,6 +2,7 @@ import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 import javax.imageio.ImageIO;
 import javax.swing.*;
 
@@ -10,17 +11,29 @@ import javax.swing.*;
 public class DrawPanel extends JPanel{
 
     // Just a single image, TODO: Generalize
-    BufferedImage volvoImage;
+
+    ArrayList<BufferedImage> imageList = new ArrayList<>();
     // To keep track of a single car's position
-    Point volvoPoint = new Point();
+    ArrayList<Point> pointList = new ArrayList<>();
+   BufferedImage image;
+
+
 
     BufferedImage volvoWorkshopImage;
     Point volvoWorkshopPoint = new Point(300,300);
 
     // TODO: Make this general for all cars
-    void moveit(int x, int y){
-        volvoPoint.x = x;
-        volvoPoint.y = y;
+    void moveit(int x, int y, int index) {
+        pointList.get(index).x = x;
+        pointList.get(index).y = y;
+
+        }
+
+    void addPoints(ArrayList<Vehicle> cars) {
+        for (Vehicle car : cars){
+            pointList.add(new Point());
+        }
+
     }
 
     // Initializes the panel and reads the images
@@ -36,7 +49,7 @@ public class DrawPanel extends JPanel{
 
             // Rememember to rightclick src New -> Package -> name: pics -> MOVE *.jpg to pics.
             // if you are starting in IntelliJ.
-            volvoImage = ImageIO.read(DrawPanel.class.getResourceAsStream("pics/Volvo240.jpg"));
+            image = ImageIO.read(DrawPanel.class.getResourceAsStream("pics/Volvo240.jpg"));
             volvoWorkshopImage = ImageIO.read(DrawPanel.class.getResourceAsStream("pics/VolvoBrand.jpg"));
         } catch (IOException ex)
         {
