@@ -33,6 +33,12 @@ abstract class Vehicle implements Movable {
     protected double getCurrentSpeed() {
         return currentSpeed;
     }
+    protected double getXPosition() {
+        return xPosition;
+    }
+    protected double getYPosition() {
+        return yPosition;
+    }
 
     protected Color getColor() {
         return color;
