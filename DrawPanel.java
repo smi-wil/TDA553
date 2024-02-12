@@ -15,9 +15,10 @@ public class DrawPanel extends JPanel{
     ArrayList<BufferedImage> imageList = new ArrayList<>();
     // To keep track of a single car's position
     ArrayList<Point> pointList = new ArrayList<>();
-   BufferedImage volvoImage;
+    BufferedImage volvoImage;
     BufferedImage saabImage ;
     BufferedImage scaniaImage;
+
 
 
 

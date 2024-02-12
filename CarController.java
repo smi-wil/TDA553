@@ -26,13 +26,14 @@ public class CarController {
     int index;
     // A list of cars, modify if needed
     ArrayList<Vehicle> cars = new ArrayList<>();
+    RepairShop <Volvo240> volvo240RepairShop;
 
     //methods:
 
     public static void main(String[] args) {
         // Instance of this class
         CarController cc = new CarController();
-
+        cc.volvo240RepairShop = new RepairShop<>(6);
         cc.cars.add(new Volvo240());
         cc.cars.add(new Saab95());
         cc.cars.add(new Scania(Color.pink, "Scania"));
@@ -73,7 +74,8 @@ public class CarController {
             i++;
         }
         //TEMP FOR TESTING YÄ
-        cars.get(0).xPosition = 320;
+        cars.get(0).xPosition = 260;
+
     }
 
     // Calls the gas method for each car once
@@ -176,14 +178,22 @@ public class CarController {
     }
     void checkCollisionRepairShop(Vehicle car, int i){
         Point point = frame.drawPanel.volvoWorkshopPoint;
+        BufferedImage imageRepairShop = frame.drawPanel.volvoWorkshopImage;
         BufferedImage image = frame.drawPanel.imageList.get(i);
+
         if (car instanceof Volvo240){
-            if (car.xPosition + image.getWidth() >= point.getX() && car.xPosition <= point.getX()
-            && car.yPosition + image.getHeight() >= point.getY() && car.yPosition <= point.getY()) {
-                System.out.println("CRASHHHHHH!!!!!! POSUDISYUDOSYSHDJAHGJHA");
+            if ((car.xPosition + image.getWidth() >= point.getX()  && car.xPosition <= point.getX()
+            && car.yPosition + image.getHeight() >= point.getY() && car.yPosition <= point.getY()) ||
+            (car.xPosition >= point.getX()  && car.xPosition <= point.getX()+imageRepairShop.getWidth() &&
+            car.yPosition >= point.getY()  && car.yPosition <= point.getY()+imageRepairShop.getHeight()))
+            {
+                car.stopEngine();
+                car.xPosition = (int) point.getX();
+                car.yPosition = (int) point.getY();
+                volvo240RepairShop.addCar((Volvo240) car);
                 }
 
-                // car.stopEngine();
+
 
                 // car.startEngine();
             }
