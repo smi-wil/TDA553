@@ -190,7 +190,9 @@ public class CarController {
                 car.stopEngine();
                 car.xPosition = (int) point.getX();
                 car.yPosition = (int) point.getY();
+
                 volvo240RepairShop.addCar((Volvo240) car);
+                System.out.println(volvo240RepairShop.getMaxCars());
                 }
 
 
