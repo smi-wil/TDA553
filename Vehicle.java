@@ -48,7 +48,7 @@ abstract class Vehicle implements Movable {
         color = clr;
     }
     protected void startEngine() {
-        currentSpeed = 0.1;
+        currentSpeed = 20.1;
     }
     protected void stopEngine() {
         currentSpeed = 0;

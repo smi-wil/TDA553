@@ -15,7 +15,10 @@ public class DrawPanel extends JPanel{
     ArrayList<BufferedImage> imageList = new ArrayList<>();
     // To keep track of a single car's position
     ArrayList<Point> pointList = new ArrayList<>();
-   BufferedImage image;
+   BufferedImage volvoImage;
+    BufferedImage saabImage ;
+    BufferedImage scaniaImage;
+
 
 
 
@@ -43,14 +46,21 @@ public class DrawPanel extends JPanel{
         this.setBackground(Color.green);
         // Print an error message in case file is not found with a try/catch block
         try {
+            volvoWorkshopImage = ImageIO.read(DrawPanel.class.getResourceAsStream("pics/VolvoBrand.jpg"));
             // You can remove the "pics" part if running outside of IntelliJ and
             // everything is in the same main folder.
             // volvoImage = ImageIO.read(new File("Volvo240.jpg"));
 
             // Rememember to rightclick src New -> Package -> name: pics -> MOVE *.jpg to pics.
             // if you are starting in IntelliJ.
-            image = ImageIO.read(DrawPanel.class.getResourceAsStream("pics/Volvo240.jpg"));
-            volvoWorkshopImage = ImageIO.read(DrawPanel.class.getResourceAsStream("pics/VolvoBrand.jpg"));
+            volvoImage = ImageIO.read(DrawPanel.class.getResourceAsStream("pics/Volvo240.jpg"));
+            saabImage = ImageIO.read(DrawPanel.class.getResourceAsStream("pics/Saab95.jpg"));
+            scaniaImage = ImageIO.read(DrawPanel.class.getResourceAsStream("pics/Scania.jpg"));
+
+            imageList.add(volvoImage);
+            imageList.add(saabImage);
+            imageList.add(scaniaImage);
+
         } catch (IOException ex)
         {
             ex.printStackTrace();
@@ -63,7 +73,12 @@ public class DrawPanel extends JPanel{
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
-        g.drawImage(volvoImage, volvoPoint.x, volvoPoint.y, null); // see javadoc for more info on the parameters
         g.drawImage(volvoWorkshopImage, volvoWorkshopPoint.x, volvoWorkshopPoint.y, null);
+
+        for (int i = 0; i < imageList.size(); i++) {
+            BufferedImage image = imageList.get(i);
+            Point point = pointList.get(i);
+            g.drawImage(image, point.x, point.y, null); // see javadoc for more info on the parameters
+        }
     }
 }

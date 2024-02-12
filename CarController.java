@@ -37,9 +37,10 @@ public class CarController {
         cc.cars.add(new Saab95());
         cc.cars.add(new Scania(Color.pink, "Scania"));
         cc.initilizePositions();
+        cc.frame = new CarView("CarSim 1.0", cc);
         cc.frame.drawPanel.addPoints(cc.cars);
         // Start a new view and send a reference of self
-        cc.frame = new CarView("CarSim 1.0", cc);
+
 
         // Start the timer
         cc.timer.start();
@@ -52,7 +53,8 @@ public class CarController {
         public void actionPerformed(ActionEvent e) {
             index = 0;
             for (Vehicle car : cars) {
-                changeDirection(car);
+                changeDirection(car, index);
+                checkCollisionRepairShop(car, index);
                 car.move();
                 int x = (int) Math.round(car.getXPosition());
                 int y = (int) Math.round(car.getYPosition());
@@ -70,6 +72,8 @@ public class CarController {
             car.yPosition += 100*i;
             i++;
         }
+        //TEMP FOR TESTING YÄ
+        cars.get(0).xPosition = 320;
     }
 
     // Calls the gas method for each car once
@@ -88,10 +92,62 @@ public class CarController {
             car.brake(brake);
         }
     }
+    void activateTurbo() {
 
-    void changeDirection(Vehicle car) {
-        BufferedImage image = frame.drawPanel.volvoImage;
-        System.out.println(car.yPosition);
+        for (Vehicle car : cars){
+            if(car instanceof Saab95)
+            {
+                ((Saab95) car).activateTurbo();
+            }
+        }
+    }
+    void deactivateTurbo() {
+
+        for (Vehicle car : cars){
+            if(car instanceof Saab95)
+            {
+                ((Saab95) car).deactivateTurbo();
+            }
+        }
+    }
+    void liftBed() {
+
+        for (Vehicle car : cars){
+            if(car instanceof Truck)
+            {
+                ((Truck) car).increaseBedAngle();
+            }
+        }
+    }
+    void lowerBed() {
+
+        for (Vehicle car : cars){
+            if(car instanceof Truck)
+            {
+                ((Truck) car).decreaseBedAngle();
+            }
+        }
+    }
+    void startCars() {
+
+        for (Vehicle car : cars){
+
+               car.startEngine();
+
+        }
+    }
+    void stopCars() {
+
+        for (Vehicle car : cars){
+
+            car.stopEngine();
+
+        }
+    }
+
+    void changeDirection(Vehicle car, int i) {
+        BufferedImage image = frame.drawPanel.imageList.get(i);
+
         // check width
         if (car.xPosition + image.getWidth() >= frame.drawPanel.getWidth() || car.xPosition < 0) {
             if (car.xPosition > 0) {
@@ -118,4 +174,20 @@ public class CarController {
         }
 
     }
-}
+    void checkCollisionRepairShop(Vehicle car, int i){
+        Point point = frame.drawPanel.volvoWorkshopPoint;
+        BufferedImage image = frame.drawPanel.imageList.get(i);
+        if (car instanceof Volvo240){
+            if (car.xPosition + image.getWidth() >= point.getX() && car.xPosition <= point.getX()
+            && car.yPosition + image.getHeight() >= point.getY() && car.yPosition <= point.getY()) {
+                System.out.println("CRASHHHHHH!!!!!! POSUDISYUDOSYSHDJAHGJHA");
+                }
+
+                // car.stopEngine();
+
+                // car.startEngine();
+            }
+        }
+
+    }
+
