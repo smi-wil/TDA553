@@ -121,6 +121,20 @@ public class CarController {
             }
         }
     }
+    void turnLeft() {
+
+        for (Vehicle car : cars){
+
+            car.turnLeft();
+        }
+    }
+    void turnRight() {
+
+        for (Vehicle car : cars){
+
+            car.turnRight();
+        }
+    }
     void lowerBed() {
 
         for (Vehicle car : cars){
@@ -184,20 +198,24 @@ public class CarController {
         if (car instanceof Volvo240){
             if ((car.xPosition + image.getWidth() >= point.getX()  && car.xPosition <= point.getX()
             && car.yPosition + image.getHeight() >= point.getY() && car.yPosition <= point.getY()) ||
+
             (car.xPosition >= point.getX()  && car.xPosition <= point.getX()+imageRepairShop.getWidth() &&
-            car.yPosition >= point.getY()  && car.yPosition <= point.getY()+imageRepairShop.getHeight()))
+            car.yPosition >= point.getY()  && car.yPosition <= point.getY()+imageRepairShop.getHeight()) ||
+
+            (car.xPosition >= point.getX()  && car.xPosition <= point.getX()+imageRepairShop.getWidth() &&
+                    car.yPosition + image.getHeight() >= point.getY() && car.yPosition <= point.getY()) ||
+
+                    (car.xPosition + image.getWidth() >= point.getX()  && car.xPosition <= point.getX() &&
+                            car.yPosition + image.getHeight() >= point.getY() && car.yPosition <= point.getY()))
             {
                 car.stopEngine();
                 car.xPosition = (int) point.getX();
                 car.yPosition = (int) point.getY();
-                volvo240RepairShop.addCar((Volvo240) car);
+                if (!volvo240RepairShop.getCarList().contains(car)) {
+                    volvo240RepairShop.addCar((Volvo240) car);
                 }
-
-
-
-                // car.startEngine();
+                }
             }
         }
-
     }
 

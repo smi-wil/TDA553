@@ -19,10 +19,6 @@ public class DrawPanel extends JPanel{
     BufferedImage saabImage ;
     BufferedImage scaniaImage;
 
-
-
-
-
     BufferedImage volvoWorkshopImage;
     Point volvoWorkshopPoint = new Point(300,300);
 

@@ -48,7 +48,7 @@ abstract class Vehicle implements Movable {
         color = clr;
     }
     protected void startEngine() {
-        currentSpeed = 20.1;
+        currentSpeed = 10.1;
     }
     protected void stopEngine() {
         currentSpeed = 0;
@@ -68,11 +68,11 @@ abstract class Vehicle implements Movable {
     }
     @Override
     public void turnLeft() {
-        direction = (direction - 10) % 360;
+        direction = (direction - 40) % 360;
     }
     @Override
     public void turnRight() {
-        direction = (direction + 10) % 360;
+        direction = (direction + 40) % 360;
     }
     public void gas(double amount) {
         if (amount > 1) {
