@@ -59,7 +59,7 @@ public class CarView extends JFrame{
 
 
         SpinnerModel spinnerModel =
-                new SpinnerNumberModel(90, //initial value
+                new SpinnerNumberModel(0, //initial value
                         0, //min
                         100, //max
                         1);//step

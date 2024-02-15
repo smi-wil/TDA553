@@ -191,8 +191,9 @@ public class CarController {
                 car.xPosition = (int) point.getX();
                 car.yPosition = (int) point.getY();
 
-                volvo240RepairShop.addCar((Volvo240) car);
-                System.out.println(volvo240RepairShop.getMaxCars());
+                if (!volvo240RepairShop.getCarList().contains(car)) {
+                    volvo240RepairShop.addCar((Volvo240) car);
+                }
                 }
 
 
