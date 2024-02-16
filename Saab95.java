@@ -19,10 +19,10 @@ class Saab95 extends Car{
         return enginePower * 0.01 * turbo;
     }
 
-    protected void activateTurbo(){
+     void activateTurbo(){
         turboOn = true;
     }
-    protected void deactivateTurbo(){
+     void deactivateTurbo(){
         turboOn = false;
     }
 }

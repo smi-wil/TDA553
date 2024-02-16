@@ -14,6 +14,12 @@ abstract class Truck extends Vehicle {
             super.gas(amount);
         }
     }
+    @Override
+    public void startEngine() {
+        if (truckBed.getTruckBedAngle() == 0) {
+            super.startEngine();
+        }
+    }
 
     public void increaseBedAngle() {
         if (currentSpeed == 0) {

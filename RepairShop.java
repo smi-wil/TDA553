@@ -9,6 +9,9 @@ public class RepairShop <A extends Car> implements Loadable<A>{
         this.maxCars = maxCars;
 
     }
+    protected int getMaxCars(){
+        return this.maxCars;}
+
     @Override
     public void addCar(A car){
         if (carList.size() < maxCars) {

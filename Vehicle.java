@@ -4,10 +4,11 @@ abstract class Vehicle implements Movable {
     protected int nrDoors; // Number of doors on the car
     protected double enginePower; // Engine power of the car
     protected double currentSpeed; // The current speed of the car
+
     protected Color color; // Color of the car
     protected String modelName; // The car model name
-    protected double xPosition;
-    protected double yPosition;
+    protected int xPosition;
+    protected int yPosition;
     protected double direction;
 
 
@@ -33,6 +34,12 @@ abstract class Vehicle implements Movable {
     protected double getCurrentSpeed() {
         return currentSpeed;
     }
+    protected int getXPosition() {
+        return xPosition;
+    }
+    protected int getYPosition() {
+        return yPosition;
+    }
 
     protected Color getColor() {
         return color;
@@ -49,7 +56,9 @@ abstract class Vehicle implements Movable {
     protected abstract double speedFactor();
 
     protected void incrementSpeed(double amount) {
-        currentSpeed = Math.min(getCurrentSpeed() + speedFactor() * amount, enginePower);
+        if (currentSpeed != 0) {
+            currentSpeed = Math.min(getCurrentSpeed() + speedFactor() * amount, enginePower);
+        }
     }
     protected void decrementSpeed(double amount) {
         currentSpeed = Math.max(getCurrentSpeed() - speedFactor() * amount, 0);
