@@ -48,7 +48,7 @@ abstract class Vehicle implements Movable {
         color = clr;
     }
     protected void startEngine() {
-        currentSpeed = 5.1;
+        currentSpeed = 0.1;
     }
     protected void stopEngine() {
         currentSpeed = 0;
@@ -56,7 +56,9 @@ abstract class Vehicle implements Movable {
     protected abstract double speedFactor();
 
     protected void incrementSpeed(double amount) {
-        currentSpeed = Math.min(getCurrentSpeed() + speedFactor() * amount, enginePower);
+        if (currentSpeed != 0) {
+            currentSpeed = Math.min(getCurrentSpeed() + speedFactor() * amount, enginePower);
+        }
     }
     protected void decrementSpeed(double amount) {
         currentSpeed = Math.max(getCurrentSpeed() - speedFactor() * amount, 0);
