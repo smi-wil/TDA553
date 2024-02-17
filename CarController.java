@@ -35,6 +35,7 @@ public class CarController {
         CarController cc = new CarController();
         cc.volvo240RepairShop = new RepairShop<>(6);
         cc.cars.add(new Volvo240());
+        cc.cars.add(new Volvo240());
         cc.cars.add(new Saab95());
         cc.cars.add(new Scania(Color.pink, "Scania"));
         cc.initilizePositions();
@@ -217,5 +218,15 @@ public class CarController {
                 }
             }
         }
+        void realseFromCarRepairShop(){
+        if (!volvo240RepairShop.getCarList().isEmpty()){
+            Car currentCar = volvo240RepairShop.getCarList().get(0);
+            currentCar.xPosition += frame.drawPanel.volvoWorkshopImage.getHeight() + 20;
+            currentCar.yPosition += frame.drawPanel.volvoWorkshopImage.getWidth() + 20;
+            volvo240RepairShop.removeCar();
+
+        }
+        }
+
     }
 

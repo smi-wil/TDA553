@@ -31,7 +31,7 @@ public class CarView extends JFrame{
 
     JButton turnLeftButton = new JButton("Turn Left");
 
-    JButton releaseFromRepairShop = new JButton("Release Car");
+    JButton releaseFromRepairShopButton = new JButton("Release Car");
 
     JButton turnRightButton = new JButton("Turn Right");
     JButton gasButton = new JButton("Gas");
@@ -81,7 +81,7 @@ public class CarView extends JFrame{
 
         this.add(gasPanel);
 
-        controlPanel.setLayout(new GridLayout(2,5));
+        controlPanel.setLayout(new GridLayout(2,4));
 
         // addera alla knappar till kontrollpanelen
         controlPanel.add(gasButton, 0);
@@ -96,22 +96,28 @@ public class CarView extends JFrame{
         controlPanel.add(turboOffButton, 7);
         controlPanel.add(lowerBedButton, 8);
 
-        controlPanel.add(releaseFromRepairShop, 9);
+
 
         controlPanel.setPreferredSize(new Dimension((X/2)+5, 200));
         this.add(controlPanel);
         controlPanel.setBackground(Color.CYAN);
 
+        // designa releaseknappen
+        releaseFromRepairShopButton.setBackground(Color.blue);
+        releaseFromRepairShopButton.setForeground(Color.blue);
+        releaseFromRepairShopButton.setPreferredSize(new Dimension(X/6-35,200));
+        this.add(releaseFromRepairShopButton);
+
         // designa startknappen
         startButton.setBackground(Color.blue);
         startButton.setForeground(Color.green);
-        startButton.setPreferredSize(new Dimension(X/5-15,200));
+        startButton.setPreferredSize(new Dimension(X/6-35,200));
         this.add(startButton);
 
         //designa stopknappen
         stopButton.setBackground(Color.red);
         stopButton.setForeground(Color.black);
-        stopButton.setPreferredSize(new Dimension(X/5-40,200));
+        stopButton.setPreferredSize(new Dimension(X/6-35,200));
         this.add(stopButton);
 
         // This actionListener is for the gas button only
@@ -175,6 +181,12 @@ public class CarView extends JFrame{
             @Override
             public void actionPerformed(ActionEvent e) {
                 carC.stopCars();
+            }
+        });
+        releaseFromRepairShopButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                carC.realseFromCarRepairShop();
             }
         });
 

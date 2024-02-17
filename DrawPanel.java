@@ -55,6 +55,7 @@ public class DrawPanel extends JPanel{
             scaniaImage = ImageIO.read(DrawPanel.class.getResourceAsStream("pics/Scania.jpg"));
 
             imageList.add(volvoImage);
+            imageList.add(volvoImage);
             imageList.add(saabImage);
             imageList.add(scaniaImage);
 
