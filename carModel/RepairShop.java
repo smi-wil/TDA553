@@ -1,3 +1,5 @@
+package carModel;
+
 import java.util.ArrayList;
 
 public class RepairShop <A extends Car> implements Loadable<A>{
@@ -5,7 +7,7 @@ public class RepairShop <A extends Car> implements Loadable<A>{
     private final ArrayList<A> carList = new ArrayList<>();
     private final int maxCars;
 
-    protected RepairShop(int maxCars){
+    public RepairShop(int maxCars){
         this.maxCars = maxCars;
 
     }
@@ -28,7 +30,7 @@ public class RepairShop <A extends Car> implements Loadable<A>{
 
     }
 
-    protected ArrayList<A> getCarList(){
+    public ArrayList<A> getCarList(){
         return carList;
     }
 }

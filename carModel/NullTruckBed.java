@@ -1,3 +1,5 @@
+package carModel;
+
 public class NullTruckBed extends TruckBed{
     @Override
     void increaseBedAngle() {}

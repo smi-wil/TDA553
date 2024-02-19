@@ -1,6 +1,7 @@
+import carModel.Vehicle;
+
 import java.awt.*;
 import java.awt.image.BufferedImage;
-import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import javax.imageio.ImageIO;
@@ -50,7 +51,7 @@ public class DrawPanel extends JPanel{
             volvoWorkshopImage = ImageIO.read(DrawPanel.class.getResourceAsStream("pics/VolvoBrand.jpg"));
             // You can remove the "pics" part if running outside of IntelliJ and
             // everything is in the same main folder.
-            // volvoImage = ImageIO.read(new File("Volvo240.jpg"));
+            // volvoImage = ImageIO.read(new File("carModel.Volvo240.jpg"));
 
             // Rememember to rightclick src New -> Package -> name: pics -> MOVE *.jpg to pics.
             // if you are starting in IntelliJ.

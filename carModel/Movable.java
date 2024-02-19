@@ -1,3 +1,5 @@
+package carModel;
+
 //Interfaces are Public by default
 interface Movable {
     void move();

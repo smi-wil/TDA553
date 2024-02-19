@@ -1,3 +1,4 @@
+package carModel;
 
 public abstract class TruckBed {
     protected int truckBedAngle;

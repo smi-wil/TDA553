@@ -1,11 +1,13 @@
+package carModel;
+
 import java.awt.*;
 
-class Saab95 extends Car{
+public class Saab95 extends Car{
 
     protected boolean turboOn;
 
-    protected Saab95(){
-        super(2, Color.red, 125, "Saab95");
+    public Saab95(){
+        super(2, Color.red, 125, "carModel.Saab95", "pics/Saab95.jpg");
 	    turboOn = false;
         stopEngine();
     }
@@ -19,10 +21,10 @@ class Saab95 extends Car{
         return enginePower * 0.01 * turbo;
     }
 
-     void activateTurbo(){
+     public void activateTurbo(){
         turboOn = true;
     }
-     void deactivateTurbo(){
+     public void deactivateTurbo(){
         turboOn = false;
     }
 }

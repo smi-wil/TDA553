@@ -1,10 +1,12 @@
+package carModel;
+
 import java.awt.*;
 
-abstract class Truck extends Vehicle {
-    protected TruckBed truckBed;
+public abstract class Truck extends Vehicle {
+    public TruckBed truckBed;
 
-    protected Truck(Color color, double enginePower, String modelName, TruckBed truckBed) {
-        super(2, color, enginePower, modelName);
+    protected Truck(Color color, double enginePower, String modelName, TruckBed truckBed, String imagePath) {
+        super(2, color, enginePower, modelName, imagePath);
         this.truckBed = truckBed;
     }
 

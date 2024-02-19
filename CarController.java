@@ -1,5 +1,8 @@
-import javax.imageio.ImageIO;
+import carModel.*;
+
 import javax.swing.*;
+import javax.swing.event.ChangeEvent;
+import javax.swing.event.ChangeListener;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -16,7 +19,7 @@ public class CarController {
     // member fields:
 
     // The delay (ms) corresponds to 20 updates a sec (hz)
-    private int hello = 10;
+
     private final int delay = 50;
     // The timer is started with a listener (see below) that executes the statements
     // each step between delays.
@@ -27,20 +30,22 @@ public class CarController {
     int index;
     // A list of cars, modify if needed
     ArrayList<Vehicle> cars = new ArrayList<>();
-    RepairShop <Volvo240> volvo240RepairShop;
+    RepairShop<Volvo240> volvo240RepairShop;
 
     //methods:
 
     public static void main(String[] args) {
         // Instance of this class
         CarController cc = new CarController();
+
         cc.volvo240RepairShop = new RepairShop<>(6);
         cc.cars.add(new Volvo240());
         cc.cars.add(new Saab95());
-        cc.cars.add(new Scania(Color.pink, "Scania"));
+        cc.cars.add(new Scania());
         cc.initilizePositions();
-        cc.frame = new CarView("CarSim 1.0", cc);
+        cc.frame = new CarView("CarSim 1.0");
         cc.frame.drawPanel.addPoints(cc.cars);
+        cc.actionListener("hello");
         // Start a new view and send a reference of self
 
 
@@ -55,8 +60,12 @@ public class CarController {
         public void actionPerformed(ActionEvent e) {
             index = 0;
             for (Vehicle car : cars) {
-                changeDirection(car, index);
-                checkCollisionRepairShop(car, index);
+                if (checkWallCollision(car, index)){
+                    changeDirection(car);
+                }
+                if (checkCollisionRepairShop(car, index)){
+                    addToRepairShop((Volvo240) car);
+                }
                 car.move();
                 int x = (int) Math.round(car.getXPosition());
                 int y = (int) Math.round(car.getYPosition());
@@ -71,11 +80,11 @@ public class CarController {
     void initilizePositions(){
         int i = 0;
         for (Vehicle car : cars){
-            car.yPosition += 100*i;
+            int yPos = car.getYPosition();
+            car.setYPosition(yPos + 100*i);
             i++;
         }
-        //TEMP FOR TESTING YÄ
-        cars.get(0).xPosition = 260;
+
 
     }
 
@@ -147,51 +156,121 @@ public class CarController {
 
         }
     }
+    void changeDirection(Vehicle car){
+        car.direction -= 180;
+    }
 
-    void changeDirection(Vehicle car, int i) {
+    boolean checkWallCollision(Vehicle car, int i) {
         BufferedImage image = frame.drawPanel.imageList.get(i);
         // check width
-        if (car.xPosition + image.getWidth() >= frame.drawPanel.getWidth() || car.xPosition < 0) {
-            if (car.xPosition > 0) {
-                car.xPosition = frame.drawPanel.getWidth() - image.getWidth();
+        if (car.getXPosition() + image.getWidth() >= frame.drawPanel.getWidth() || car.getXPosition() < 0) {
+            if (car.getXPosition() > 0) {
+                car.setXPosition(frame.drawPanel.getWidth() - image.getWidth());
             } else {
-                car.xPosition = 0;
+                car.setXPosition(0);
             }
-            car.direction -= 180;
+            return true;
         }
         // check height
-        else if (car.yPosition + image.getHeight() >= frame.drawPanel.getHeight() || car.yPosition < 0) {
-            if (car.yPosition > 0) {
-                car.yPosition = frame.drawPanel.getHeight() - image.getHeight() - 5;
+        else if (car.getYPosition() + image.getHeight() >= frame.drawPanel.getHeight() || car.getYPosition() < 0) {
+            if (car.getYPosition() > 0) {
+                car.setYPosition(frame.drawPanel.getHeight() - image.getHeight());
             } else {
-                car.yPosition = 0;
+                car.setYPosition(0);
             }
-            car.direction -= 180;
+            return true;
         }
-
+    return false;
     }
-    void checkCollisionRepairShop(Vehicle car, int i){
+
+    void addToRepairShop(Volvo240 car){
+        if (!volvo240RepairShop.getCarList().contains(car)) {
+            volvo240RepairShop.addCar(car);
+        }
+    }
+    boolean checkCollisionRepairShop(Vehicle car, int i){
         Point point = frame.drawPanel.volvoWorkshopPoint;
         BufferedImage imageRepairShop = frame.drawPanel.volvoWorkshopImage;
         BufferedImage image = frame.drawPanel.imageList.get(i);
 
         if (car instanceof Volvo240){
-            if ((car.xPosition + image.getWidth() >= point.getX()  && car.xPosition <= point.getX()
-            && car.yPosition + image.getHeight() >= point.getY() && car.yPosition <= point.getY()) ||
-            (car.xPosition >= point.getX()  && car.xPosition <= point.getX()+imageRepairShop.getWidth() &&
-            car.yPosition >= point.getY()  && car.yPosition <= point.getY()+imageRepairShop.getHeight()))
+            if ((car.getXPosition() + image.getWidth() >= point.getX()  && car.getXPosition() <= point.getX()
+            && car.getYPosition() + image.getHeight() >= point.getY() && car.getYPosition() <= point.getY()) ||
+            (car.getXPosition() >= point.getX()  && car.getXPosition() <= point.getX()+imageRepairShop.getWidth() &&
+            car.getYPosition() >= point.getY()  && car.getYPosition() <= point.getY()+imageRepairShop.getHeight()))
             {
                 car.stopEngine();
-                car.xPosition = (int) point.getX();
-                car.yPosition = (int) point.getY();
+                car.setXPosition((int) point.getX());
+                car.setYPosition((int) point.getY());
+              return true;
 
-                if (!volvo240RepairShop.getCarList().contains(car)) {
-                    volvo240RepairShop.addCar((Volvo240) car);
                 }
-                }
-                // car.startEngine();
+
             }
+        return false;
         }
 
+    private void actionListener(String title) {
+
+
+        // This actionListener is for the gas button only
+        // TODO: Create more for each component as necessary
+        //
+        frame.gasSpinner.addChangeListener(new ChangeListener() {
+            public void stateChanged(ChangeEvent e) {
+                frame.gasAmount = (int) ((JSpinner)e.getSource()).getValue();
+            }
+        });
+        frame.gasButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                gas(frame.gasAmount);
+            }
+        });
+        frame.brakeButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                brake(frame.gasAmount);
+            }
+        });
+        frame.turboOnButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e){
+                activateTurbo();
+            }
+        });
+        frame.turboOffButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                deactivateTurbo();
+            }
+        });
+        frame.liftBedButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                liftBed();
+            }
+        });
+        frame.lowerBedButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                lowerBed();
+            }
+        });
+        frame.startButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                startCars();
+            }
+        });
+        frame.stopButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                stopCars();
+            }
+        });
+
     }
+}
+
 

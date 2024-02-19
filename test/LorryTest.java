@@ -1,3 +1,7 @@
+import carModel.Car;
+import carModel.Lorry;
+import carModel.Scania;
+import carModel.Volvo240;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -12,14 +16,14 @@ class LorryTest {
     Car volvo1 = new Volvo240();
     Car volvo2 = new Volvo240();
 
-    Scania scania1 = new Scania(Color.pink, "Scania");
+    Scania scania1 = new Scania();
     @BeforeEach
     void setUp() {
         lorry1 = new Lorry();
         lorry2 = new Lorry();
         volvo1 = new Volvo240();
         volvo2 = new Volvo240();
-        scania1 = new Scania(Color.pink, "Scania");
+        scania1 = new Scania();
     }
 
     @Test
@@ -70,13 +74,13 @@ class LorryTest {
         lorry1.carStack.add(volvo1);
         lorry1.currentSpeed = 100;
         lorry1.move();
-        assertEquals(lorry1.yPosition, volvo1.yPosition);
-        assertEquals(lorry1.xPosition, volvo1.xPosition);
+        assertEquals(lorry1.getYPosition(), volvo1.getYPosition());
+        assertEquals(lorry1.getXPosition(), volvo1.getXPosition());
     }
     @Test
     void move2() {
         lorry1.currentSpeed = 10;
         lorry1.move();
-        assertTrue(lorry1.yPosition > 0);
+        assertTrue(lorry1.getYPosition() > 0);
     }
 }

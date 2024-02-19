@@ -1,13 +1,15 @@
+package carModel;
+
 import java.awt.*;
 import java.util.Iterator;
 import java.util.Stack;
 
-class Lorry extends Truck implements Loadable<Car> {
-    protected Stack<Car> carStack = new Stack<>();
-    protected int totCars = 0;
+public class Lorry extends Truck implements Loadable<Car> {
+    public Stack<Car> carStack = new Stack<>();
+    public int totCars = 0;
 
-    protected Lorry() {
-        super(Color.black, 2000, "Lorry", new StandardTruckBed());
+    public Lorry() {
+        super(Color.black, 2000, "Lorry", new StandardTruckBed(), "pics/Scania.jpg");
         stopEngine();
     }
 
@@ -35,7 +37,7 @@ class Lorry extends Truck implements Loadable<Car> {
     }
     @Override
     public Car removeCar() {
-        if (totCars > 0 && !(truckBed.getTruckBedAngle() == 70)) { // This means the Lorry will be still.
+        if (totCars > 0 && !(truckBed.getTruckBedAngle() == 70)) { // This means the carModel.Lorry will be still.
 
             Car removedCar = carStack.pop();
             removedCar.xPosition -= 5;

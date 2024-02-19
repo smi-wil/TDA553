@@ -1,18 +1,26 @@
-import java.awt.*;
+package carModel;
 
-abstract class Vehicle implements Movable {
+import javax.imageio.ImageIO;
+import java.awt.*;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
+
+public abstract class Vehicle implements Movable {
     protected int nrDoors; // Number of doors on the car
     protected double enginePower; // Engine power of the car
-    protected double currentSpeed; // The current speed of the car
+    public double currentSpeed; // The current speed of the car
 
     protected Color color; // Color of the car
     protected String modelName; // The car model name
     protected int xPosition;
     protected int yPosition;
-    protected double direction;
+    public double direction;
+
+    protected BufferedImage image;
 
 
-    protected Vehicle(int nrDoors, Color color, double enginePower, String modelName) {
+    protected Vehicle(int nrDoors, Color color, double enginePower, String modelName, String imagePath) {
         this.nrDoors = nrDoors;
         this.color = color;
         this.enginePower = enginePower;
@@ -20,6 +28,11 @@ abstract class Vehicle implements Movable {
         this.xPosition = 0;
         this.yPosition = 0;
         this.direction = 0;
+        try {
+            this.image = ImageIO.read(new File(imagePath));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
         stopEngine();
     }
 
@@ -34,11 +47,18 @@ abstract class Vehicle implements Movable {
     protected double getCurrentSpeed() {
         return currentSpeed;
     }
-    protected int getXPosition() {
+    public int getXPosition() {
         return xPosition;
     }
-    protected int getYPosition() {
+    public int getYPosition() {
         return yPosition;
+    }
+
+    public void setXPosition(int xPosition) {
+        this.xPosition = xPosition;
+    }
+    public void setYPosition(int yPosition) {
+        this.yPosition = yPosition;
     }
 
     protected Color getColor() {
@@ -47,10 +67,10 @@ abstract class Vehicle implements Movable {
     protected void setColor(Color clr) {
         color = clr;
     }
-    protected void startEngine() {
+    public void startEngine() {
         currentSpeed = 0.1;
     }
-    protected void stopEngine() {
+    public void stopEngine() {
         currentSpeed = 0;
     }
     protected abstract double speedFactor();
