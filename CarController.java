@@ -16,6 +16,7 @@ public class CarController {
     // member fields:
 
     // The delay (ms) corresponds to 20 updates a sec (hz)
+    private int hello = 10;
     private final int delay = 50;
     // The timer is started with a listener (see below) that executes the statements
     // each step between delays.
@@ -149,7 +150,6 @@ public class CarController {
 
     void changeDirection(Vehicle car, int i) {
         BufferedImage image = frame.drawPanel.imageList.get(i);
-
         // check width
         if (car.xPosition + image.getWidth() >= frame.drawPanel.getWidth() || car.xPosition < 0) {
             if (car.xPosition > 0) {
@@ -157,10 +157,7 @@ public class CarController {
             } else {
                 car.xPosition = 0;
             }
-
-            // car.stopEngine();
             car.direction -= 180;
-            // car.startEngine();
         }
         // check height
         else if (car.yPosition + image.getHeight() >= frame.drawPanel.getHeight() || car.yPosition < 0) {
@@ -169,10 +166,7 @@ public class CarController {
             } else {
                 car.yPosition = 0;
             }
-
-            // car.stopEngine();
             car.direction -= 180;
-            // car.startEngine();
         }
 
     }
@@ -195,9 +189,6 @@ public class CarController {
                     volvo240RepairShop.addCar((Volvo240) car);
                 }
                 }
-
-
-
                 // car.startEngine();
             }
         }
