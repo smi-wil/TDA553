@@ -1,5 +1,4 @@
 import carModel.*;
-
 import javax.swing.*;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
@@ -120,60 +119,7 @@ public class CarController {
             car.stopEngine();
         }
     }
-    void changeDirection(Vehicle car){
-        car.direction -= 180;
-    }
 
-    //borde vi ha en checkWidthCollision och en checkHeightCollison? Blir det mer modulärt?
-    // däremot borde vi inte ta in index utan snarare skicka med rätt bild som argument. blir tydligare utifrån.
-    boolean checkWallCollision(Vehicle car, int i) {
-        // BufferedImage image = car.image;
-        BufferedImage image = frame.drawPanel.imageList.get(i);
-        // check width
-        if (car.getXPosition() + image.getWidth() >= frame.drawPanel.getWidth() || car.getXPosition() < 0) {
-            if (car.getXPosition() > 0) {
-                car.setXPosition(frame.drawPanel.getWidth() - image.getWidth());
-            } else {
-                car.setXPosition(0);
-            }
-            return true;
-        }
-        // check height
-        else if (car.getYPosition() + image.getHeight() >= frame.drawPanel.getHeight() || car.getYPosition() < 0) {
-            if (car.getYPosition() > 0) {
-                car.setYPosition(frame.drawPanel.getHeight() - image.getHeight());
-            } else {
-                car.setYPosition(0);
-            }
-            return true;
-        }
-    return false;
-    }
-
-    void addToRepairShop(Volvo240 car){
-        if (!volvo240RepairShop.getCarList().contains(car)) {
-            volvo240RepairShop.addCar(car);
-        }
-    }
-    boolean checkCollisionRepairShop(Vehicle car, int i){
-        Point point = frame.drawPanel.volvoWorkshopPoint;
-        BufferedImage imageRepairShop = frame.drawPanel.volvoWorkshopImage;
-        BufferedImage image = frame.drawPanel.imageList.get(i);
-
-        if (car instanceof Volvo240){
-            if ((car.getXPosition() + image.getWidth() >= point.getX()  && car.getXPosition() <= point.getX()
-            && car.getYPosition() + image.getHeight() >= point.getY() && car.getYPosition() <= point.getY()) ||
-            (car.getXPosition() >= point.getX()  && car.getXPosition() <= point.getX()+imageRepairShop.getWidth() &&
-            car.getYPosition() >= point.getY()  && car.getYPosition() <= point.getY()+imageRepairShop.getHeight()))
-            {
-                car.stopEngine();
-                car.setXPosition((int) point.getX());
-                car.setYPosition((int) point.getY());
-              return true;
-                }
-            }
-        return false;
-        }
 
         // ACTIONLISTENERS
     private void actionListener(String title) {

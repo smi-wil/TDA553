@@ -1,7 +1,7 @@
 import carModel.*;
 
 public class CarApp {
-    TimerListener timer;
+
     public static void main(String[] args) {
         CarModel cars = new CarModel();
        // CarView view =
@@ -12,10 +12,9 @@ public class CarApp {
 
         cc.initilizePositions();
 
-        cars.animate();
 
-        TimerListener timer = new TimerListener(cars, panel);
-        timer.start();
+
+        cars.timer.start();
     }
 
 

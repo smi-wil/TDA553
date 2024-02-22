@@ -1,3 +1,5 @@
+import carModel.CarObserver;
+
 import javax.swing.*;
 import java.awt.*;
 /**
@@ -11,7 +13,7 @@ import java.awt.*;
     // kanske att detta enbart är widget?? alltså CarControllerWidget
     // "dum frame" med knappar.
     // sen har vi CarController som en observer till denna klass?
-public class CarView extends JFrame{
+public class CarView extends JFrame implements CarObserver {
     private static final int X = 800;
     private static final int Y = 800;
 
@@ -89,5 +91,10 @@ public class CarView extends JFrame{
         this.setVisible(true);
         // Make sure the frame exits when "x" is pressed
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+    }
+
+    @Override
+    public void actOnModelUpdate() {
+        drawPanel.repaint();
     }
 }

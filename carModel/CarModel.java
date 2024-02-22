@@ -1,21 +1,29 @@
 package carModel;
 
-import java.awt.*;
+import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 
 public class CarModel {
+    private static final int X = 800;
+    private static final int Y = 800;
+    private final CarObservable observable;
 
+    private final int delay = 50;
+    public Timer timer = new Timer(delay, new TimerListener());
     ArrayList<Vehicle> cars = new ArrayList<>();
-    ArrayList<CarObserver> observers = new ArrayList<>();
+
     RepairShop<Volvo240> volvo240RepairShop;
 
     public CarModel(){
+
         cars.add(new Volvo240());
         cars.add(new Saab95());
         cars.add(new Scania());
+
+        observable = new CarObservable();
         volvo240RepairShop = new RepairShop<>(6);
     }
 
@@ -25,20 +33,11 @@ public class CarModel {
     public ArrayList<Vehicle> getCars(){
         return this.cars;
     }
-    public void addObservers(){
-
-    }
-    public void notifyObservers(){
-        for (CarObserver o : observers){
-            o.actOnModelUpdate();
-        }
-    }
+  
     void changeDirection(Vehicle car){
         car.direction -= 180;
     }
 
-    //borde vi ha en checkWidthCollision och en checkHeightCollison? Blir det mer modulärt?
-    // däremot borde vi inte ta in index utan snarare skicka med rätt bild som argument. blir tydligare utifrån.
     boolean checkWallCollision(Vehicle car, int width, int height) {
         // BufferedImage image = car.image;
         int carXpos = car.getXPosition();
@@ -71,7 +70,7 @@ public class CarModel {
             volvo240RepairShop.addCar(car);
         }
     }
-    boolean checkCollisionRepairShop(Vehicle car, RepairShop repairShop){
+    boolean checkCollisionRepairShop(Vehicle car, RepairShop <? extends Vehicle> repairShop){
         BufferedImage imageRepairShop = repairShop.getImage();
         BufferedImage image = car.getImage();
         int carXpos = car.getXPosition();
@@ -85,6 +84,7 @@ public class CarModel {
                     (carXpos >= repXpos  && carXpos <= repXpos+imageRepairShop.getWidth() &&
                             carYpos >= repYpos && carYpos <= repYpos+imageRepairShop.getHeight()))
             {
+                addToRepairShop((Volvo240) car);
                 car.stopEngine();
                 car.setXPosition(repXpos);
                 car.setYPosition(repYpos);
@@ -92,5 +92,19 @@ public class CarModel {
             }
         }
         return false;
+    }
+    private class TimerListener implements ActionListener {
+        public void actionPerformed(ActionEvent e) {
+            for (Vehicle car : cars) {
+                if (checkWallCollision(car, X, Y)) {
+                    changeDirection(car);
+                }
+                if (checkCollisionRepairShop(car, volvo240RepairShop)) {
+                    changeDirection(car);
+                }
+                car.move();
+            }
+            observable.notifyListeners();
+        }
     }
 }
