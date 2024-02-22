@@ -3,18 +3,19 @@ import carModel.*;
 public class CarApp {
 
     public static void main(String[] args) {
-        CarModel cars = new CarModel();
+        CarModel model = new CarModel();
        // CarView view =
                 //createViewForModel(cars);
+        namnetärintesåviktigt n = new namnetärintesåviktigt(model.getCars(), model.getVolvo240RepairShop());
 
-        CarController cc = new CarController();
-        DrawPanel panel = view.drawPanel;
+        CarView view = new CarView("hej", n);
+        CarController cc = new CarController(model, view);
 
         cc.initilizePositions();
 
 
 
-        cars.timer.start();
+        model.timer.start();
     }
 
 

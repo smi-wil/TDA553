@@ -6,7 +6,7 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 
-public abstract class Vehicle implements Movable {
+public abstract class Vehicle implements Movable, Drawable {
     protected int nrDoors; // Number of doors on the car
     protected double enginePower; // Engine power of the car
     public double currentSpeed; // The current speed of the car

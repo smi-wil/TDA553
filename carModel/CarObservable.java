@@ -5,11 +5,8 @@ import javax.swing.*;
 import java.util.ArrayList;
 
 class CarObservable implements Observable {
-
-    private Timer timer;
-    private ArrayList<Vehicle> carSet;
-
-    //private CarModel carModel;
+//    private Timer timer;
+//    private ArrayList<Vehicle> carSet;
 
     public void addObserver(CarObserver o){
         observers.add(o);

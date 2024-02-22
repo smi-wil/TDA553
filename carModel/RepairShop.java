@@ -6,7 +6,7 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 
-public class RepairShop <A extends Car> implements Loadable<A>{
+public class RepairShop <A extends Car> implements Loadable<A>, Drawable{
 
     private final ArrayList<A> carList = new ArrayList<>();
     private final int maxCars;

@@ -1,12 +1,14 @@
 import carModel.CarModel;
+import carModel.Drawable;
 import carModel.Vehicle;
 
 import java.awt.*;
+import java.util.ArrayList;
 import javax.swing.*;
 
 public class DrawPanel extends JPanel{
-    CarModel model;
-    public DrawPanel(int x, int y) {
+
+    public DrawPanel(int x, int y, namnetärintesåviktigt n) {
         this.setDoubleBuffered(true);
         this.setPreferredSize(new Dimension(x, y));
         this.setBackground(Color.pink);

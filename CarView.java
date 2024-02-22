@@ -1,7 +1,10 @@
 import carModel.CarObserver;
+import carModel.Drawable;
 
 import javax.swing.*;
 import java.awt.*;
+import java.util.ArrayList;
+
 /**
  * This class represents the full view of the MVC pattern of your car simulator.
  * It initializes with being center on the screen and attaching it's controller in it's state.
@@ -17,8 +20,10 @@ public class CarView extends JFrame implements CarObserver {
     private static final int X = 800;
     private static final int Y = 800;
 
+
+
     // The controller member
-    DrawPanel drawPanel = new DrawPanel(X, Y-240);
+    DrawPanel drawPanel;
     JPanel controlPanel = new JPanel();
     JPanel gasPanel = new JPanel();
     JSpinner gasSpinner = new JSpinner();
@@ -34,8 +39,9 @@ public class CarView extends JFrame implements CarObserver {
     int gasAmount = 0;
 
     // Constructor
-    public CarView(String framename){
+    public CarView(String framename, namnetärintesåviktigt n){
         initComponents(framename);
+         this.drawPanel = new DrawPanel(X, Y-240, n);
     }
 
     private void initComponents(String title) {

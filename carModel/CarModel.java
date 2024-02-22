@@ -10,11 +10,9 @@ public class CarModel {
     private static final int X = 800;
     private static final int Y = 800;
     private final CarObservable observable;
-
     private final int delay = 50;
     public Timer timer = new Timer(delay, new TimerListener());
     ArrayList<Vehicle> cars = new ArrayList<>();
-
     RepairShop<Volvo240> volvo240RepairShop;
 
     public CarModel(){
