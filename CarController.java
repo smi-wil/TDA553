@@ -17,9 +17,7 @@ import java.util.ArrayList;
 
 public class CarController {
     // member fields:
-
     // The delay (ms) corresponds to 20 updates a sec (hz)
-
     private final int delay = 50;
     // The timer is started with a listener (see below) that executes the statements
     // each step between delays.
@@ -47,8 +45,6 @@ public class CarController {
         cc.frame.drawPanel.addPoints(cc.cars);
         cc.actionListener("hello");
         // Start a new view and send a reference of self
-
-
         // Start the timer
         cc.timer.start();
     }
@@ -56,27 +52,7 @@ public class CarController {
     /* Each step the TimerListener moves all the cars in the list and tells the
      * view to update its images. Change this method to your needs.
      * */
-    private class TimerListener implements ActionListener {
-        public void actionPerformed(ActionEvent e) {
-            index = 0;
-            for (Vehicle car : cars) {
-                if (checkWallCollision(car, index)){
-                    changeDirection(car);
-                }
-                if (checkCollisionRepairShop(car, index)){
-                    addToRepairShop((Volvo240) car);
-                }
-                car.move();
-                int x = (int) Math.round(car.getXPosition());
-                int y = (int) Math.round(car.getYPosition());
 
-                frame.drawPanel.moveit(x, y, index);
-                // repaint() calls the paintComponent method of the panel
-                frame.drawPanel.repaint();
-                index++;
-            }
-        }
-    }
     void initilizePositions(){
         int i = 0;
         for (Vehicle car : cars){
@@ -84,8 +60,6 @@ public class CarController {
             car.setYPosition(yPos + 100*i);
             i++;
         }
-
-
     }
 
     // Calls the gas method for each car once
@@ -105,7 +79,6 @@ public class CarController {
         }
     }
     void activateTurbo() {
-
         for (Vehicle car : cars){
             if(car instanceof Saab95)
             {
@@ -114,7 +87,6 @@ public class CarController {
         }
     }
     void deactivateTurbo() {
-
         for (Vehicle car : cars){
             if(car instanceof Saab95)
             {
@@ -123,7 +95,6 @@ public class CarController {
         }
     }
     void liftBed() {
-
         for (Vehicle car : cars){
             if(car instanceof Truck)
             {
@@ -132,7 +103,6 @@ public class CarController {
         }
     }
     void lowerBed() {
-
         for (Vehicle car : cars){
             if(car instanceof Truck)
             {
@@ -141,26 +111,23 @@ public class CarController {
         }
     }
     void startCars() {
-
         for (Vehicle car : cars){
-
                car.startEngine();
-
         }
     }
     void stopCars() {
-
         for (Vehicle car : cars){
-
             car.stopEngine();
-
         }
     }
     void changeDirection(Vehicle car){
         car.direction -= 180;
     }
 
+    //borde vi ha en checkWidthCollision och en checkHeightCollison? Blir det mer modulärt?
+    // däremot borde vi inte ta in index utan snarare skicka med rätt bild som argument. blir tydligare utifrån.
     boolean checkWallCollision(Vehicle car, int i) {
+        // BufferedImage image = car.image;
         BufferedImage image = frame.drawPanel.imageList.get(i);
         // check width
         if (car.getXPosition() + image.getWidth() >= frame.drawPanel.getWidth() || car.getXPosition() < 0) {
@@ -203,19 +170,14 @@ public class CarController {
                 car.setXPosition((int) point.getX());
                 car.setYPosition((int) point.getY());
               return true;
-
                 }
-
             }
         return false;
         }
 
+        // ACTIONLISTENERS
     private void actionListener(String title) {
 
-
-        // This actionListener is for the gas button only
-        // TODO: Create more for each component as necessary
-        //
         frame.gasSpinner.addChangeListener(new ChangeListener() {
             public void stateChanged(ChangeEvent e) {
                 frame.gasAmount = (int) ((JSpinner)e.getSource()).getValue();

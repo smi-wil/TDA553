@@ -8,6 +8,9 @@ import java.awt.*;
  **/
 
 // CarView is just the frame, initializing the components
+    // kanske att detta enbart är widget?? alltså CarControllerWidget
+    // "dum frame" med knappar.
+    // sen har vi CarController som en observer till denna klass?
 public class CarView extends JFrame{
     private static final int X = 800;
     private static final int Y = 800;
