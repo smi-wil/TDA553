@@ -49,10 +49,10 @@ public class RepairShop <A extends Car> implements Loadable<A>, Drawable{
     public BufferedImage getImage(){
         return this.image;
     }
-    public int getX(){
+    public int getXPosition(){
         return this.x;
     }
-    public int getY(){
+    public int getYPosition(){
         return this.y;
     }
 }

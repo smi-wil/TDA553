@@ -9,11 +9,12 @@ import java.util.ArrayList;
 public class CarModel {
     private static final int X = 800;
     private static final int Y = 800;
-    private final CarObservable observable;
+    public final CarObservable observable;
     private final int delay = 50;
     public Timer timer = new Timer(delay, new TimerListener());
     ArrayList<Vehicle> cars = new ArrayList<>();
     RepairShop<Volvo240> volvo240RepairShop;
+
 
     public CarModel(){
 
@@ -31,7 +32,7 @@ public class CarModel {
     public ArrayList<Vehicle> getCars(){
         return this.cars;
     }
-  
+
     void changeDirection(Vehicle car){
         car.direction -= 180;
     }
@@ -73,8 +74,8 @@ public class CarModel {
         BufferedImage image = car.getImage();
         int carXpos = car.getXPosition();
         int carYpos = car.getYPosition();
-        int repXpos = repairShop.getX();
-        int repYpos = repairShop.getY();
+        int repXpos = repairShop.getXPosition();
+        int repYpos = repairShop.getYPosition();
 
         if (car instanceof Volvo240){
             if ((carXpos + image.getWidth() >= repXpos  && carXpos <= repXpos
@@ -104,5 +105,16 @@ public class CarModel {
             }
             observable.notifyListeners();
         }
+    }
+    public ArrayList<Drawable> getDrawables(){
+        ArrayList<Drawable> drawables = new ArrayList<>();
+        for (Drawable car : cars){
+            drawables.add(car);
+        }
+        drawables.add(volvo240RepairShop);
+        return drawables;
+    }
+    public void addObserver(CarObserver observer){
+        observable.addObserver(observer);
     }
 }

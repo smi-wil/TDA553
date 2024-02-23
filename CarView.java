@@ -1,3 +1,4 @@
+import carModel.CarModel;
 import carModel.CarObserver;
 import carModel.Drawable;
 
@@ -20,8 +21,6 @@ public class CarView extends JFrame implements CarObserver {
     private static final int X = 800;
     private static final int Y = 800;
 
-
-
     // The controller member
     DrawPanel drawPanel;
     JPanel controlPanel = new JPanel();
@@ -37,11 +36,14 @@ public class CarView extends JFrame implements CarObserver {
     JButton startButton = new JButton("Start all cars");
     JButton stopButton = new JButton("Stop all cars");
     int gasAmount = 0;
+    CarModel model;
 
     // Constructor
-    public CarView(String framename, namnetärintesåviktigt n){
-        initComponents(framename);
-         this.drawPanel = new DrawPanel(X, Y-240, n);
+    public CarView(String framename, CarModel model){
+
+         this.drawPanel = new DrawPanel(X, Y-240, model.getDrawables());
+         this.model = model;
+         initComponents(framename);
     }
 
     private void initComponents(String title) {
@@ -99,8 +101,11 @@ public class CarView extends JFrame implements CarObserver {
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     }
 
+
     @Override
     public void actOnModelUpdate() {
+        ArrayList<Drawable> drawables = model.getDrawables();
+        drawPanel.updateDrawables(drawables);
         drawPanel.repaint();
     }
 }

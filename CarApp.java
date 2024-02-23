@@ -1,19 +1,22 @@
 import carModel.*;
 
+import java.util.ArrayList;
+
 public class CarApp {
 
     public static void main(String[] args) {
         CarModel model = new CarModel();
+
        // CarView view =
                 //createViewForModel(cars);
-        namnetärintesåviktigt n = new namnetärintesåviktigt(model.getCars(), model.getVolvo240RepairShop());
+        ArrayList<Drawable> drawables = model.getDrawables();
 
-        CarView view = new CarView("hej", n);
+        CarView view = new CarView("hej", model);
+        model.addObserver(view);
+
         CarController cc = new CarController(model, view);
 
         cc.initilizePositions();
-
-
 
         model.timer.start();
     }
