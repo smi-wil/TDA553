@@ -40,10 +40,9 @@ public class CarView extends JFrame implements CarObserver {
 
     // Constructor
     public CarView(String framename, CarModel model){
-
-         this.drawPanel = new DrawPanel(X, Y-240, model.getDrawables());
-         this.model = model;
-         initComponents(framename);
+        this.model = model;
+        this.drawPanel = new DrawPanel(X, Y-240, model.getDrawables());
+        initComponents(framename);
     }
 
     private void initComponents(String title) {

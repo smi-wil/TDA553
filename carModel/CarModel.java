@@ -38,24 +38,23 @@ public class CarModel {
     }
 
     boolean checkWallCollision(Vehicle car, int width, int height) {
-        // BufferedImage image = car.image;
         int carXpos = car.getXPosition();
         int carYpos = car.getYPosition();
-        BufferedImage image = car.getImage();
+        BufferedImage carImage = car.getImage();
 
         // check width
-        if (carXpos + image.getWidth() >= width || carXpos < 0) {
+        if (carXpos + carImage.getWidth() >= width || carXpos < 0) {
             if (carXpos > 0) {
-                car.setXPosition(width - image.getWidth());
+                car.setXPosition(width - carImage.getWidth());
             } else {
                 car.setXPosition(0);
             }
             return true;
         }
         // check height
-        else if (carYpos + image.getHeight() >= height || carYpos < 0) {
+        else if (carYpos + carImage.getHeight() >= height || carYpos < 0) {
             if (carYpos > 0) {
-                car.setYPosition(height - image.getHeight());
+                car.setYPosition(height - carImage.getHeight());
             } else {
                 car.setYPosition(0);
             }
@@ -95,7 +94,7 @@ public class CarModel {
     private class TimerListener implements ActionListener {
         public void actionPerformed(ActionEvent e) {
             for (Vehicle car : cars) {
-                if (checkWallCollision(car, X, Y)) {
+                if (checkWallCollision(car, X, Y-240)) {
                     changeDirection(car);
                 }
                 if (checkCollisionRepairShop(car, volvo240RepairShop)) {
