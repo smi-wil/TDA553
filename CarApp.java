@@ -20,13 +20,18 @@ public class CarApp {
 
         model.timer.start();
     }
-
-
-
+}
+//public static CarModel createModel(){
+//    CarModel model = new CarModel();
+//
+//    model.addCar(VehicleFactory.createVolvo());
+//    model.addCar(PolygonFactory.createSaab());
+//    model.addCar(PolygonFactory.createScania());
+//
+//    return model;
 //    private static CarView createViewForModel(CarModel carModel) {
 //        CarView view = new CarView();
 //        view.addModel(polygonModel);
 //        polygonModel.addListener(view);
 //        return view;
 //    }//initViewForModel
-}

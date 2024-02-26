@@ -108,3 +108,4 @@ public class CarView extends JFrame implements CarObserver {
         drawPanel.repaint();
     }
 }
+
