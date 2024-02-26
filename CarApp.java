@@ -1,22 +1,16 @@
 import carModel.*;
 
-import java.util.ArrayList;
-
 public class CarApp {
 
     public static void main(String[] args) {
         CarModel model = new CarModel();
 
-       // CarView view =
-                //createViewForModel(cars);
-        ArrayList<Drawable> drawables = model.getDrawables();
-
         CarView view = new CarView("hej", model);
         model.addObserver(view);
 
-        CarController cc = new CarController(model, view);
+        new CarController(model, view);
 
-        cc.initilizePositions();
+        model.initilizePositions();
 
         model.timer.start();
     }

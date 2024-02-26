@@ -32,6 +32,14 @@ public class CarModel {
     public ArrayList<Vehicle> getCars(){
         return this.cars;
     }
+    public void initilizePositions(){
+        int i = 0;
+        for (Vehicle car : getCars()){
+            int yPos = car.getYPosition();
+            car.setYPosition(yPos + 100*i);
+            i++;
+        }
+    }
 
     void changeDirection(Vehicle car){
         car.direction -= 180;
@@ -113,9 +121,67 @@ public class CarModel {
         drawables.add(volvo240RepairShop);
         return drawables;
     }
-    public void addObserver(CarObserver observer){
+    public void addObserver(Observer observer){
         observable.addObserver(observer);
     }
+
+
+    // Calls the gas method for each car once
+    public void gas(int amount) {
+        double gas = ((double) amount) / 100;
+        getCars().forEach(car -> car.gas(gas));
+    }// make for everyone
+
+    public void brake(int amount) {
+        double brake = ((double) amount) / 100;
+        for (Vehicle car : getCars()
+        ) {
+            car.brake(brake);
+        }
+    }
+    public void activateTurbo() {
+        for (Vehicle car : getCars()){
+            if(car instanceof Saab95)
+            {
+                ((Saab95) car).activateTurbo();
+            }
+        }
+    }
+    public void deactivateTurbo() {
+        for (Vehicle car : getCars()){
+            if(car instanceof Saab95)
+            {
+                ((Saab95) car).deactivateTurbo();
+            }
+        }
+    }
+    public void liftBed() {
+        for (Vehicle car : getCars()){
+            if(car instanceof Truck)
+            {
+                ((Truck) car).increaseBedAngle();
+            }
+        }
+    }
+    public void lowerBed() {
+        for (Vehicle car : getCars()){
+            if(car instanceof Truck)
+            {
+                ((Truck) car).decreaseBedAngle();
+            }
+        }
+    }
+    public void startCars() {
+        for (Vehicle car : getCars()){
+            car.startEngine();
+        }
+    }
+    public void stopCars() {
+        for (Vehicle car : getCars()){
+            car.stopEngine();
+        }
+    }
+
 }
 
 
