@@ -81,6 +81,18 @@ public class CarController{
                 model.stopCars();
             }
         });
+        frame.addButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                model.addVehicle(VehicleFactory.createVolvo());
+            }
+        });
+        frame.removeButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                model.removeVehicle();
+            }
+        });
 
     }
 }

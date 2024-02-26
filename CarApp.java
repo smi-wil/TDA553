@@ -4,8 +4,11 @@ public class CarApp {
 
     public static void main(String[] args) {
         CarModel model = new CarModel();
+        model.addVehicle(VehicleFactory.createVolvo());
+        model.addVehicle(VehicleFactory.createSaab());
+        model.addVehicle(VehicleFactory.createScania());
 
-        CarView view = new CarView("hej", model);
+        CarView view = new CarView("CarSimulator", model);
         model.addObserver(view);
 
         new CarController(model, view);
@@ -13,19 +16,8 @@ public class CarApp {
         model.initilizePositions();
 
         model.timer.start();
+
+
     }
 }
-//public static CarModel createModel(){
-//    CarModel model = new CarModel();
-//
-//    model.addCar(VehicleFactory.createVolvo());
-//    model.addCar(PolygonFactory.createSaab());
-//    model.addCar(PolygonFactory.createScania());
-//
-//    return model;
-//    private static CarView createViewForModel(CarModel carModel) {
-//        CarView view = new CarView();
-//        view.addModel(polygonModel);
-//        polygonModel.addListener(view);
-//        return view;
-//    }//initViewForModel
+

@@ -18,10 +18,6 @@ public class CarModel {
 
     public CarModel(){
 
-        cars.add(new Volvo240());
-        cars.add(new Saab95());
-        cars.add(new Scania());
-
         observable = new CarObservable();
         volvo240RepairShop = new RepairShop<>(6);
     }
@@ -182,6 +178,18 @@ public class CarModel {
         }
     }
 
+    public void addVehicle(Vehicle v){
+        if (cars.size() < 5){
+            cars.add(v);
+        }
+
+    }
+    public void removeVehicle(){
+        if (cars.size() > 0 ){
+            cars.remove(0);
+        }
+
+    }
 }
 
 
